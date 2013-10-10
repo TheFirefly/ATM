@@ -30,6 +30,7 @@ public class ATMAccount {
 
 	public String changeName(String name) {
 		this.name = name;
+		return name;
 	}
 
 	public int getPin() {
@@ -38,6 +39,7 @@ public class ATMAccount {
 
 	public int changePin(int pin) {
 		this.pin = pin;
+		return pin;
 	}
 
 }
