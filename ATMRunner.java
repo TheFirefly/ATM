@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 public class ATMRunner {
-	
-	Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) {
+
+		Scanner input = new Scanner(System.in);
 		
 		ATMAccount account = new ATMAccount("Bob", 1234, 100);
 		
