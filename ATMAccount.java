@@ -3,23 +3,40 @@ public class ATMAccount {
 	private String name;
 	private int pin;
 	private long balance;
-	private long funds;
+
+	public ATMAccount(String name, int pin, long balance) {
+		this.name = name;
+		this.pin = pin;
+		this.balance = balance;
+	}
 
 	public long checkBalance() {
 		return this.balance;
 	}
 
 	public long withdrawFunds(long funds) {
-		if ((balance - funds) < 0) {
-			System.out.println("Error");
+		if ((this.balance - funds) < 0) {
+			System.out.println("Error - Not enough in balance to take out that much.");
 		} else {
-			balance = balance - funds;
-			return balance;
+			this.balance -= funds;
+			return this.balance;
 		}
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
 	public String changeName(String name) {
-		
+		this.name = name;
+	}
+
+	public int getPin() {
+		return this.pin;
+	}
+
+	public int changePin(int pin) {
+		this.pin = pin;
 	}
 
 }
