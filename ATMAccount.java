@@ -17,6 +17,7 @@ public class ATMAccount {
 	public long withdrawFunds(long funds) {
 		if ((this.balance - funds) < 0) {
 			System.out.println("Error - Not enough in balance to take out that much.");
+			return -1;
 		} else {
 			this.balance -= funds;
 			return this.balance;
