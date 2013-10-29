@@ -19,9 +19,13 @@ public class ATMRunner {
 		System.out.println("Please login: ");
 		String line = input.nextLine();
 		if (atm.validateInput(line)) {
-			System.out.println("Success");
+			System.out.println("Successfully logged in!");
+			System.out.println("What would you like to do now?");
+			System.out.println("Check Balance, Withdraw Funds, Change Name, Change PIN, Logout");
+			String command = input.nextLine();
+			atm.validateInput(command);
 		} else {
-			System.out.println("Failure");
+			return;
 		}
 
 	}

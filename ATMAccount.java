@@ -7,7 +7,7 @@ public class ATMAccount {
 	public ATMAccount(String name, int pin, long balance) {
 		this.name = name;
 		this.pin = pin;
-		this.balance = balance;
+		this.balance = balance;	
 	}
 
 	public long checkBalance() {

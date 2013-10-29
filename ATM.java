@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class ATM {
 	private ATMAccount[] accounts;
 	private ATMAccount workingAccount;
@@ -7,7 +9,7 @@ public class ATM {
 	}
 
 	public String[] formatInput(String input) {
-		return (input.toLowerCase().replaceFirst(" ", "")).split(" ");
+		return (input.toLowerCase()).split(" ");
 	}
 
 	public boolean validateInput(String input) {
@@ -17,48 +19,40 @@ public class ATM {
 		if (newInput.equals("checkbalance")) {
 			if (checkBalance() != -1) {
 				System.out.println("Your balance is: " + checkBalance());
-				return true;
-			} else {
-				return false;
 			}
 		} else if (newInput.equals("withdrawfunds") && data[1] != null) {
-			if (withdrawFunds(data[1]) != -1) {
-				long left = withdrawFunds(data[1]);
-				System.out.println("Successfully withdrew " + data[1] + ", Balance left: " + left);
-				return true;
-			} else {
-				return false;
+			if (withdrawFunds(Long.parseLong(data[1])) != -1) {
+				System.out.println("Successfully withdrew " + data[1] + ", Balance left: " + checkBalance());
 			}
 		} else if (newInput.equals("changename") && data[1] != null) {
 			String name = changeName(data[1]);
 			System.out.println("Successfully changed name to: " + name);
-			return true;
 		} else if (newInput.equals("changepin") && data[1] != null) {
-			int pin = changePin(data[1]);
+			int pin = changePin(Integer.parseInt(data[1]));
 			System.out.println("Successfully changed PIN to: " + pin);
-			return true;
 		} else if (newInput.equals("logout")) {
 			logout();
 			return true;
 		} else if (newInput.equals("login") && data[1] != null && data[2] != null) {
-			login(data[1], data[2]);
-			return true;
-		} else {
-			return false;
+			return login(data[1], Integer.parseInt(data[2]));
 		}
+		Scanner scan = new Scanner(System.in);
+		System.out.println("What would you like to do now?");
+		System.out.println("Check Balance, Withdraw Funds, Change Name, Change PIN, Logout");
+		String command = scan.nextLine();
+		validateInput(command);
+
+		return true;
 	}
 
-	public void login(String name, int pin) {
+	public boolean login(String name, int pin) {
 		ATMAccount account = validate(name, pin);
 		if (account != null) {
 			this.workingAccount = account;
-			System.out.println("Successfully logged in as: " + workingAccount.getName());
-			System.out.println("What would you like to do now?");
-			System.out.println("Check Balance, Withdraw Funds, Change Name, Change PIN, Logout");
-			return;
+			return true;
 		} else {
 			System.out.println("Invalid username/password!");
-			return;
+			return false;
 		}
 	}
 
@@ -95,7 +89,7 @@ public class ATM {
 
 	public ATMAccount validate(String name, int pin) {
 		for (int i = 0 ; i < accounts.length ; i++) {
-			if (this.accounts[i].getName().equals(name) && this.accounts[i].getPin() == pin) {
+			if (this.accounts[i].getName().equalsIgnoreCase(name) && this.accounts[i].getPin() == pin) {
 				return this.accounts[i];
 			}
 		}
